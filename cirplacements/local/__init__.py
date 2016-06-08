@@ -1,0 +1,1 @@
+/root/xyz/bin/django/CIR/cir-portal/cirplacements/__init__.py
