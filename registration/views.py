@@ -106,10 +106,10 @@ class StudentListView(LoginRequiredMixin,ListView):
 
 class StudentListUpdateView(UpdateView):
     model = Student
-    form_class = StudentRegistrationForm
     template_name_suffix = '_update_form'
     success_url = '/register/cirstaff/success/'
 
+    fields = student_fields
     def get_object(self, queryset=None):
         obj = Student.Objects.get(aums_id= self.kwargs['aums_id'])
         if obj:
