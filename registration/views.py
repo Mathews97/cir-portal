@@ -116,3 +116,15 @@ class StudentListUpdateView(UpdateView):
             return obj
         else:
             raise Http404("That doesnt exist.")
+
+class StudentFilterExternalView(ListView):
+    template_name = "register/cir-portal/filter_external_list.html"
+
+    def get_queryset(self):
+        cgpa=self.request.GET.get('cgpa')
+        arrears=self.request.GET.get('arrear')
+        twelth=self.request.GET.get('twelth')
+        tenth=self.request.GET.get('tenth')
+        branch=self.request.GET.get('branch')
+
+        return Student.Objects.filter(cgpa__gte=cgpa, curr_arrears=arrears, branch=branch, tenth_mark__gte=tenth, twelth_mark__gte=twelth)
