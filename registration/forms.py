@@ -73,4 +73,7 @@ class StudentRegistrationForm(ModelForm):
 
 
 
-
+test_widgets= {
+    'marks'         : forms.TextInput(attrs={'placeholder':_('Marks obtained'),
+                                               'required': True}),
+}

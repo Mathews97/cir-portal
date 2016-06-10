@@ -101,4 +101,66 @@ class Student(models.Model):
     curr_arrears = models.FloatField(_('No of current arrears'), blank=True, null=True)
     hist_arrears = models.FloatField(_('No of history arrears'), blank=True, null=True)
 
+
     Objects = StudentManager()
+
+TYPES = (('Technical', _('Technical')), ('HR', _('HR')), ('Quantitative', _('Quantitative')),
+             ('Verbals', _('Verbals')),
+             ('Reasoning', _('Reasoning')),
+             ('Eligibility', _('Eligibility')),
+             ('Aptitude', _('Aptitude'))
+             )
+class TestManager(models.Manager):
+    pass
+
+class Test(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(_('Test Name'), max_length=25, unique=False)
+    date = models.DateField(_('Test Date'), null=False)
+    type = models.CharField(_('Test Type'), max_length=20,
+                            choices=TYPES, blank=False, unique=False)
+
+    Objects = TestManager()
+
+class TechTestManager(models.Manager):
+    def create_test_entry(self, student, test, marks):
+        return self.create(students=student, test=test, marks=marks)
+
+class TechTest(models.Model):
+    test = models.ForeignKey( Test, null=False, blank=False)
+    students = models.ForeignKey(Student, null=False, blank=False)
+    marks = models.FloatField(_('Mark'), null=False, blank=False)
+
+    Objects = TechTestManager()
+
+
+class HrTest(models.Model):
+    test = models.ForeignKey( Test, null=False, blank=False)
+    students = models.ForeignKey(Student, null=False, blank=False)
+    marks = models.FloatField(_('Mark'), null=False, blank=False)
+
+class QuantitativeTest(models.Model):
+    test = models.ForeignKey( Test, null=False, blank=False)
+    students = models.ForeignKey(Student, null=False, blank=False)
+    marks = models.FloatField(_('Mark'), null=False, blank=False)
+class VerbalsTest(models.Model):
+    test = models.ForeignKey( Test, null=False, blank=False)
+    students = models.ForeignKey(Student, null=False, blank=False)
+    marks = models.FloatField(_('Mark'), null=False, blank=False)
+class ReasoningTest(models.Model):
+    test = models.ForeignKey( Test, null=False, blank=False)
+    students = models.ForeignKey(Student, null=False, blank=False)
+    marks = models.FloatField(_('Mark'), null=False, blank=False)
+class EligibilityTest(models.Model):
+    test = models.ForeignKey( Test, null=False, blank=False)
+    students = models.ForeignKey(Student, null=False, blank=False)
+    marks = models.FloatField(_('Mark'), null=False, blank=False)
+
+class AptitudeTest(models.Model):
+    test = models.ForeignKey( Test, null=False, blank=False)
+    students = models.ForeignKey(Student, null=False, blank=False)
+    marks = models.FloatField(_('Mark'), null=False, blank=False)
+
+
+
+
